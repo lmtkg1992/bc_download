@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Bc_Download>
+            <version>0.1.0</version>
+        </Bc_Download>
+    </modules>
+
+    <global>
+        <blocks>
+            <download>
+                <class>Bc_Download_Block</class>
+            </download>
+        </blocks>
+        <helpers>
+            <download>
+                <class>Bc_Download_Helper</class>
+            </download>
+        </helpers>
+    </global>
+
+    <adminhtml>
+
+        <layout>
+            <updates>
+                <download>
+                    <file>bcdownload.xml</file>
+                </download>
+            </updates>
+        </layout>
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <bc_download_save_product_data>
+                        <type>singleton</type>
+                        <class>Bc_Download_Model_Observer</class>
+                        <method>saveProductTabData</method>
+                    </bc_download_save_product_data>
+                </observers>
+            </catalog_product_save_after>
+        </events>
+    </adminhtml>
+</config>

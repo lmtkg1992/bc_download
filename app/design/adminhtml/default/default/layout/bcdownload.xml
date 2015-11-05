@@ -4,7 +4,7 @@
         <reference name="product_tabs">
             <action method="addTab">
                 <name>bc_extra_downloads</name>
-                <block>download/adminhtml_catalog_product_tab</block>
+                <block>download/adminhtml_catalog_product_extradownload</block>
             </action>
         </reference>
     </adminhtml_catalog_product_edit>

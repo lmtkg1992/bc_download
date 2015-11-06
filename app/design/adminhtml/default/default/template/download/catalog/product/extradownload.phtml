@@ -86,12 +86,17 @@
         massUploadByType : function(type){
             try {
                 this.uploaderObj.get(type).each(function(item){
+                    console.log(1);
                     container = item.value.container.up('tr');
                     if (container.visible() && !container.hasClassName('no-display')) {
+                        console.log(2);
+                        console.log(item.value);
                         item.value.upload();
                     } else {
+                        console.log(3);
                         Downloadable.unsetUploaderObj(type, item.key);
                     }
+                    console.log(4);
                 });
             } catch (e) {
                 try {
@@ -123,6 +128,8 @@
             this.fileValue = fileValue;
             this.idName = idName;
             this.config = config;
+            console.log('config');
+            console.log(config);
             uploaderTemplate = new Template(this.uploaderText, this.uploaderSyntax);
             <?php if (!$this->isReadonly()):?>
             Element.insert(
@@ -222,7 +229,7 @@
     var alertAlreadyDisplayed = false;
 
     Validation.addAllThese([
-        ['validate-downloadable-file', 'Please upload a file.', function(v,element) {
+        ['validate-extradownload-file', 'Please upload a file.', function(v,element) {
             linkType = element.up(0).down('input[value="file"]');
             if (linkType.checked && (v == '' || v == '[]')) {
                 newFileContainer = element.up(0).down('div.new-file');
@@ -237,7 +244,7 @@
     ]);
 
     Validation.addAllThese([
-        ['validate-downloadable-url', 'Please specify Url.', function(v,element) {
+        ['validate-extradownload-url', 'Please specify Url.', function(v,element) {
             linkType = element.up(0).down('input[value="url"]');
             if (linkType.checked && v == '') {
                 return false;
@@ -258,7 +265,7 @@
 </div>
 <?php if ($this->isReadonly()): ?>
     <script type="text/javascript">
-        $('downloadableInfo').select('input', 'select', 'textarea', 'button').each(function (item){
+        $('extraDownloadInfo').select('input', 'select', 'textarea', 'button').each(function (item){
             item.disabled = true;
             if (item.tagName.toLowerCase() == 'button') {
                 item.addClassName('disabled');

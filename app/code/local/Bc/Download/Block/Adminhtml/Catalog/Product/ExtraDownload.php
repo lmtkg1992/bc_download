@@ -15,6 +15,7 @@ class Bc_Download_Block_Adminhtml_Catalog_Product_ExtraDownload extends Mage_Adm
     public function isReadonly()
     {
         return $this->getProduct()->getDownloadableReadonly();
+
     }
 
     /**

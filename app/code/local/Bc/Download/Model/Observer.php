@@ -18,30 +18,57 @@ class Bc_Download_Model_Observer
      */
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
-        if (!self::$_singletonFlag) {
-            self::$_singletonFlag = true;
+        Mage::log('saveProductTabData',null,'bcdownload.log');
 
-            $product = $observer->getEvent()->getProduct();
+        $request = $observer->getEvent()->getRequest();
+        $product = $observer->getEvent()->getProduct();
 
-            try {
-                /**
-                 * Perform any actions you want here
-                 *
-                 */
-                $customFieldValue =  $this->_getRequest()->getPost('custom_field');
+        if ($data = $request->getPost('extradownload')) {
+            Mage::log($data,null,'bcdownload.log');
 
-                Mage::log($customFieldValue,null,'bcdownload.log');
+            if(isset($data['link'])){
+                $_deleteItems = array();
+                foreach ($data['link'] as $linkItem) {
+                    if ($linkItem['is_delete'] == 1) {
+                        if ($linkItem['link_id']) {
+                            $_deleteItems[] = $linkItem['link_id'];
+                        }
+                    }
+                    else{
 
-                /**
-                 * Uncomment the line below to save the product
-                 *
-                 */
-                //$product->save();
+                        unset($linkItem['is_delete']);
+                        if (!$linkItem['link_id']) {
+                            unset($linkItem['link_id']);
+                        }
+                        $files = array();
+                        if (isset($linkItem['file'])) {
+                            $files = Mage::helper('core')->jsonDecode($linkItem['file']);
+                            unset($linkItem['file']);
+                        }
+
+                        $linkModel = Mage::getModel('download/link')->setData($linkItem)->setLinkType($linkItem['type'])->setProductId($product->getId())->setStoreId($product->getStoreId());
+
+                        $linkFileName = Mage::helper('download/file')->moveFileFromTmp(
+                            Bc_Download_Model_Link::getBaseTmpPath(),
+                            Bc_Download_Model_Link::getBasePath(),
+                            $files
+                        );
+                        $linkModel->setLinkFile($linkFileName);
+
+                        $linkModel->save();
+
+                    }
+                }
+                if ($_deleteItems) {
+                    Mage::log('delete Items',null,'bcdownload.log');
+                    Mage::log($_deleteItems,null,'bcdownload.log');
+                    Mage::getResourceModel('download/link')->deleteItems($_deleteItems);
+                }
             }
-            catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            }
+
         }
+
+        return $this;
     }
 
     /**

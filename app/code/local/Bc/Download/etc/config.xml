@@ -5,7 +5,17 @@
             <version>0.1.0</version>
         </Bc_Download>
     </modules>
-
+    <frontend>
+        <routers>
+            <bc_download>
+                <use>standard</use>
+                <args>
+                    <module>Bc_Download</module>
+                    <frontName>download</frontName>
+                </args>
+            </bc_download>
+        </routers>
+    </frontend>
     <global>
         <blocks>
             <download>
@@ -17,10 +27,46 @@
                 <class>Bc_Download_Helper</class>
             </download>
         </helpers>
+        <models>
+            <download>
+                <class>Bc_Download_Model</class>
+                <resourceModel>download_resource</resourceModel>
+            </download>
+            <download_resource>
+                <class>Bc_Download_Model_Resource</class>
+                <entities>
+                    <link>
+                        <table>extradownload_link</table>
+                    </link>
+                    <link_title>
+                        <table>extradownload_link_title</table>
+                    </link_title>
+                </entities>
+            </download_resource>
+        </models>
+        <resources>
+            <download_setup>
+                <setup>
+                    <module>Bc_Download</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </download_setup>
+            <download_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </download_read>
+            <download_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </download_write>
+        </resources>
     </global>
 
     <adminhtml>
-
         <layout>
             <updates>
                 <download>
@@ -29,7 +75,7 @@
             </updates>
         </layout>
         <events>
-            <catalog_product_save_after>
+            <catalog_product_prepare_save>
                 <observers>
                     <bc_download_save_product_data>
                         <type>singleton</type>
@@ -37,7 +83,18 @@
                         <method>saveProductTabData</method>
                     </bc_download_save_product_data>
                 </observers>
-            </catalog_product_save_after>
+            </catalog_product_prepare_save>
         </events>
     </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Bc_Download before="Mage_Adminhtml">Bc_Download_Adminhtml</Bc_Download>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>

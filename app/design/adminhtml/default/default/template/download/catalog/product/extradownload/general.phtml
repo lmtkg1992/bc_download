@@ -43,46 +43,48 @@
 
     var ExtraDownloadlinkTemplate = '<tr>'+
         '<td>'+
-        '<input type="hidden" class="__delete__" name="extradownload[link][{{id}}][is_delete]" value="" />'+
-        '<input type="hidden" name="extradownload[link][{{id}}][link_id]" value="{{link_id}}" />'+
-        '<input type="text" class="required-entry input-text" name="extradownload[link][{{id}}][title]" value="{{title}}" />'+
-        '<?php echo $_product->getStoreId()?'<input type="checkbox" id="extradownload{{id}}_title" name="extradownload[link][{{id}}][use_default_title]" value="1" /><label class="normal" for="extradownload_link_{{id}}_title">Use Default Value</label>':'' ?>'+
+            '<input type="hidden" class="__delete__" name="extradownload[link][{{id}}][is_delete]" value="" />'+
+            '<input type="hidden" name="extradownload[link][{{id}}][link_id]" value="{{link_id}}" />'+
+            '<input type="text" class="required-entry input-text" name="extradownload[link][{{id}}][title]" value="{{title}}" />'+
+            '<?php echo $_product->getStoreId()?'<input type="checkbox" id="extradownload{{id}}_title" name="extradownload[link][{{id}}][use_default_title]" value="1" /><label class="normal" for="extradownload_link_{{id}}_title">Use Default Value</label>':'' ?>'+
         '</td>'+
+
         '<td class="a-center">'+
-        '<select id="extradownload_link _{{id}}_visible" name="extradownload[link][{{id}}][is_visible]">'+
-            '<option value="1">Yes</option>'+
-            '<option value="0">No</option>'+
-        '</select>'+
+            '<select id="extradownload_link _{{id}}_visible" name="extradownload[link][{{id}}][is_visible]">'+
+                '<option value="1">Yes</option>'+
+                '<option value="0">No</option>'+
+            '</select>'+
         '</td>'+
+
         '<td>'+
-        '<div class="files">'+
-        '<div class="row">'+
-        '<label for="extradownload_link_{{id}}_file_type"><input type="radio" class="radio validate-one-required-by-name" id="extradownload_link_{{id}}_file_type" name="extradownload[link][{{id}}][type]" value="file"{{file_checked}} /> File:</label>'+
-        '<input type="hidden" class="validate-extradownload-file" id="extradownload_link_{{id}}_file_save" name="extradownload[link][{{id}}][file]" value="{{file_save}}" />'+
-        '<div id="extradownload_link_{{id}}_file" class="uploader">'+
-        '<div id="extradownload_link_{{id}}_file-old" class="file-row-info"></div>'+
-        '<div id="extradownload_link_{{id}}_file-new" class="file-row-info new-file"></div>'+
-        '<div class="buttons">'+
-        '<div id="extradownload_link_{{id}}_file-install-flash" style="display:none">'+
-        '<?php echo $this->jsQuoteEscape(Mage::helper('media')->__('This content requires last version of Adobe Flash Player. <a href="%s">Get Flash</a>', 'http://www.adobe.com/go/getflash/')) ?>'+
-        '</div>'+
-        '</div>'+
-        '<div class="clear"></div>'+
-        '</div>'+
-        '</div>'+
-        '<div class="row">'+
-        '<label for="extradownload_link_{{id}}_url_type"><input type="radio" class="radio validate-one-required-by-name" id="extradownload_link_{{id}}_url_type" name="extradownload[link][{{id}}][type]" value="url"{{url_checked}} /> URL:</label><input type="text" class="validate-extradownload-url input-text" name="extradownload[link][{{id}}][link_url]" value="{{link_url}}" />'+
-        '</div>'+
-        '<div>'+
-        '<span id="extradownload_link_{{id}}_link_container"></span>'+
-        '</div>'+
-        '</div>'+
+            '<div class="files">'+
+            '<div class="row">'+
+                '<label for="extradownload_link_{{id}}_file_type"><input type="radio" class="radio validate-one-required-by-name" id="extradownload_link_{{id}}_file_type" name="extradownload[link][{{id}}][type]" value="file"{{file_checked}} /> File:</label>'+
+                '<input type="hidden" class="validate-extradownload-file" id="extradownload_link_{{id}}_file_save" name="extradownload[link][{{id}}][file]" value="{{file_save}}" />'+
+                '<div id="extradownload_link_{{id}}_file" class="uploader">'+
+                    '<div id="extradownload_link_{{id}}_file-old" class="file-row-info"></div>'+
+                        '<div id="extradownload_link_{{id}}_file-new" class="file-row-info new-file"></div>'+
+                            '<div class="buttons">'+
+                                '<div id="extradownload_link_{{id}}_file-install-flash" style="display:none">'+
+                                '<?php echo $this->jsQuoteEscape(Mage::helper('media')->__('This content requires last version of Adobe Flash Player. <a href="%s">Get Flash</a>', 'http://www.adobe.com/go/getflash/')) ?>'+
+                                '</div>'+
+                            '</div>'+
+                        '<div class="clear"></div>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="row">'+
+                    '<label for="extradownload_link_{{id}}_url_type"><input type="radio" class="radio validate-one-required-by-name" id="extradownload_link_{{id}}_url_type" name="extradownload[link][{{id}}][type]" value="url"{{url_checked}} /> URL:</label><input type="text" class="validate-extradownload-url input-text" name="extradownload[link][{{id}}][link_url]" value="{{link_url}}" />'+
+                '</div>'+
+                '<div>'+
+                    '<span id="extradownload_link_{{id}}_link_container"></span>'+
+                '</div>'+
+            '</div>'+
         '</td>'+
 
         '<td class="a-center"><input type="text" name="extradownload[link][{{id}}][sort_order]" value="{{sort_order}}" class="input-text sort" /></td>'+
 
         '<td>'+
-        '<button id="extradownload_link_{{id}}_delete_button" type="button" class="scalable delete icon-btn delete-link-item"><span><span><span><?php echo $this->jsQuoteEscape(Mage::helper('download')->__('Delete')); ?></span></span></span></button>'+
+            '<button id="extradownload_link_{{id}}_delete_button" type="button" class="scalable delete icon-btn delete-link-item"><span><span><span><?php echo $this->jsQuoteEscape(Mage::helper('download')->__('Delete')); ?></span></span></span></button>'+
         '</td>'+
 
         '</tr>';
@@ -93,12 +95,9 @@
         templateText : ExtraDownloadlinkTemplate ,
         itemCount : 0,
         add : function(data) {
-            console.log(1);
             alertAlreadyDisplayed = false;
-            console.log(2);
 
             this.template = new Template(this.templateText, this.templateSyntax);
-            console.log(3);
             if(!data.link_id){
                 data = {};
                 data.link_id  = 0;
@@ -108,7 +107,6 @@
             }
 
             data.id = this.itemCount;
-            console.log(4);
             if (data.link_type == 'url') {
                 data.url_checked = ' checked="checked"';
             } else if (data.link_type == 'file') {
@@ -148,15 +146,12 @@
                 }
             }
 
-
-            sampleUrl = $('extradownload_link_'+data.id+'_sample_url_type');
             linkUrl = $('extradownload_link_'+data.id+'_url_type');
 
             if (!data.file_save) {
                 data.file_save = [];
             }
 
-            console.log(5);
             // link file
             new Downloadable.FileUploader(
                 'links',
@@ -165,7 +160,7 @@
                 'extradownload[link]['+data.id+']',
                 data.file_save,
                 'extradownload_link_'+data.id+'_file',
-                ''
+                <?php echo $this->getConfigJson() ?>
             );
 
             linkFile = $('extradownload_link_'+data.id+'_file_type');
@@ -175,7 +170,6 @@
 
             this.itemCount++;
             this.bindRemoveButtons();
-            console.log(10);
         },
         remove : function(event){
             var element = $(Event.findElement(event, 'tr'));
@@ -206,5 +200,9 @@
     if($('extradownload_add_link_item')) {
         Event.observe('extradownload_add_link_item', 'click', ExtraDownloadlinkItems.add.bind(ExtraDownloadlinkItems ));
     }
+
+    <?php foreach ($this->getLinkData() as $item): ?>
+    ExtraDownloadlinkItems.add(<?php echo $item->toJson()?>);
+    <?php endforeach; ?>
 
 </script>
